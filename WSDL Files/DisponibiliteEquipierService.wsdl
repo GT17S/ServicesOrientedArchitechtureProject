@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://Services" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Services">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://Services">
+            <xs:element name="RandomSOA">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="capaciteMaxChaqueEquipe" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RandomSOAResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DisponibiliteEquipierService">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="typeProjet" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DisponibiliteEquipierServiceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="RandomSOARequest">
+        <wsdl:part name="parameters" element="ns:RandomSOA"/>
+    </wsdl:message>
+    <wsdl:message name="RandomSOAResponse">
+        <wsdl:part name="parameters" element="ns:RandomSOAResponse"/>
+    </wsdl:message>
+    <wsdl:message name="DisponibiliteEquipierServiceRequest">
+        <wsdl:part name="parameters" element="ns:DisponibiliteEquipierService"/>
+    </wsdl:message>
+    <wsdl:message name="DisponibiliteEquipierServiceResponse">
+        <wsdl:part name="parameters" element="ns:DisponibiliteEquipierServiceResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="DisponibiliteEquipierServicePortType">
+        <wsdl:operation name="RandomSOA">
+            <wsdl:input message="ns:RandomSOARequest" wsaw:Action="urn:RandomSOA"/>
+            <wsdl:output message="ns:RandomSOAResponse" wsaw:Action="urn:RandomSOAResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="DisponibiliteEquipierService">
+            <wsdl:input message="ns:DisponibiliteEquipierServiceRequest" wsaw:Action="urn:DisponibiliteEquipierService"/>
+            <wsdl:output message="ns:DisponibiliteEquipierServiceResponse" wsaw:Action="urn:DisponibiliteEquipierServiceResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="DisponibiliteEquipierServiceSoap11Binding" type="ns:DisponibiliteEquipierServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="RandomSOA">
+            <soap:operation soapAction="urn:RandomSOA" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DisponibiliteEquipierService">
+            <soap:operation soapAction="urn:DisponibiliteEquipierService" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="DisponibiliteEquipierServiceSoap12Binding" type="ns:DisponibiliteEquipierServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="RandomSOA">
+            <soap12:operation soapAction="urn:RandomSOA" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DisponibiliteEquipierService">
+            <soap12:operation soapAction="urn:DisponibiliteEquipierService" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="DisponibiliteEquipierServiceHttpBinding" type="ns:DisponibiliteEquipierServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="RandomSOA">
+            <http:operation location="RandomSOA"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DisponibiliteEquipierService">
+            <http:operation location="DisponibiliteEquipierService"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="DisponibiliteEquipierService">
+        <wsdl:port name="DisponibiliteEquipierServiceHttpSoap11Endpoint" binding="ns:DisponibiliteEquipierServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/DisponibiliteEquipierService.DisponibiliteEquipierServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="DisponibiliteEquipierServiceHttpSoap12Endpoint" binding="ns:DisponibiliteEquipierServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/DisponibiliteEquipierService.DisponibiliteEquipierServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="DisponibiliteEquipierServiceHttpEndpoint" binding="ns:DisponibiliteEquipierServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/DisponibiliteEquipierService.DisponibiliteEquipierServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

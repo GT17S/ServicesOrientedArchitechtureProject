@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://Services" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax25="http://rmi.java/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax26="http://io.java/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Services">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax27="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://rmi.java/xsd">
+            <xs:import namespace="http://io.java/xsd"/>
+            <xs:complexType name="RemoteException">
+                <xs:complexContent>
+                    <xs:extension base="ax27:IOException">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType"/>
+                            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax28="http://rmi.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://Services">
+            <xs:import namespace="http://rmi.java/xsd"/>
+            <xs:element name="QualificationProjectServiceRemoteException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="RemoteException" nillable="true" type="ax28:RemoteException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="QualificationProjectService">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="nomClient" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="prenomClient" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="typeProjet" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="QualificationProjectServiceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RandomSOA">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="capaciteMaxChaqueEquipe" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RandomSOAResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="main">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="args" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+            <xs:complexType name="IOException">
+                <xs:sequence/>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="QualificationProjectServiceRequest">
+        <wsdl:part name="parameters" element="ns:QualificationProjectService"/>
+    </wsdl:message>
+    <wsdl:message name="QualificationProjectServiceResponse">
+        <wsdl:part name="parameters" element="ns:QualificationProjectServiceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="QualificationProjectServiceRemoteException">
+        <wsdl:part name="parameters" element="ns:QualificationProjectServiceRemoteException"/>
+    </wsdl:message>
+    <wsdl:message name="mainRequest">
+        <wsdl:part name="parameters" element="ns:main"/>
+    </wsdl:message>
+    <wsdl:message name="RandomSOARequest">
+        <wsdl:part name="parameters" element="ns:RandomSOA"/>
+    </wsdl:message>
+    <wsdl:message name="RandomSOAResponse">
+        <wsdl:part name="parameters" element="ns:RandomSOAResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="QualificationProjectServicePortType">
+        <wsdl:operation name="QualificationProjectService">
+            <wsdl:input message="ns:QualificationProjectServiceRequest" wsaw:Action="urn:QualificationProjectService"/>
+            <wsdl:output message="ns:QualificationProjectServiceResponse" wsaw:Action="urn:QualificationProjectServiceResponse"/>
+            <wsdl:fault message="ns:QualificationProjectServiceRemoteException" name="QualificationProjectServiceRemoteException" wsaw:Action="urn:QualificationProjectServiceQualificationProjectServiceRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <wsdl:input message="ns:mainRequest" wsaw:Action="urn:main"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:mainResponse"/>
+            <wsdl:fault message="ns:QualificationProjectServiceRemoteException" name="QualificationProjectServiceRemoteException" wsaw:Action="urn:mainQualificationProjectServiceRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="RandomSOA">
+            <wsdl:input message="ns:RandomSOARequest" wsaw:Action="urn:RandomSOA"/>
+            <wsdl:output message="ns:RandomSOAResponse" wsaw:Action="urn:RandomSOAResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="QualificationProjectServiceSoap11Binding" type="ns:QualificationProjectServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="QualificationProjectService">
+            <soap:operation soapAction="urn:QualificationProjectService" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="QualificationProjectServiceRemoteException">
+                <soap:fault use="literal" name="QualificationProjectServiceRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <soap:operation soapAction="urn:main" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="QualificationProjectServiceRemoteException">
+                <soap:fault use="literal" name="QualificationProjectServiceRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="RandomSOA">
+            <soap:operation soapAction="urn:RandomSOA" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="QualificationProjectServiceSoap12Binding" type="ns:QualificationProjectServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="QualificationProjectService">
+            <soap12:operation soapAction="urn:QualificationProjectService" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="QualificationProjectServiceRemoteException">
+                <soap12:fault use="literal" name="QualificationProjectServiceRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <soap12:operation soapAction="urn:main" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="QualificationProjectServiceRemoteException">
+                <soap12:fault use="literal" name="QualificationProjectServiceRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="RandomSOA">
+            <soap12:operation soapAction="urn:RandomSOA" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="QualificationProjectServiceHttpBinding" type="ns:QualificationProjectServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="QualificationProjectService">
+            <http:operation location="QualificationProjectService"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <http:operation location="main"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RandomSOA">
+            <http:operation location="RandomSOA"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="QualificationProjectService">
+        <wsdl:port name="QualificationProjectServiceHttpSoap11Endpoint" binding="ns:QualificationProjectServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/QualificationProjectService.QualificationProjectServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="QualificationProjectServiceHttpSoap12Endpoint" binding="ns:QualificationProjectServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/QualificationProjectService.QualificationProjectServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="QualificationProjectServiceHttpEndpoint" binding="ns:QualificationProjectServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/QualificationProjectService.QualificationProjectServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
